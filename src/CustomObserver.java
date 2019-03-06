@@ -1,18 +1,4 @@
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,10 +16,6 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
     /**
      * Creates new form CustomObserver
      */
-    
-    public CustomObserver() {
-    }
-    
     public CustomObserver(Portfolio portfolio) {
         initComponents();
         this.portfolio = portfolio;
@@ -223,7 +205,6 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         String selectedItem = availableStockComboBox.getSelectedItem().toString();
         // If the subject is changed, frame should be removed from the observer and frame should subscribe to new stock.
-        
         String symbol = selectedItem.split(",")[0];
         Stock stock = portfolio.getStock(symbol);
         stock.addObserver(this);
@@ -245,166 +226,23 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
         }
 
         if(lineGraphCheckBox.isSelected()){
-            ChartFrame chartFrame = new ChartFrame(new LineChartCreator());
+            ChartJFrame chartFrame = new ChartJFrame(new LineChartCreator());
             Thread thread = new Thread(chartFrame);
             thread.start();
             stock.addObserver(chartFrame);
         }
         
-        
-        //panel = panelDecorator.decoratePanel();
-        
-        //lowerPanel.add(panel);
-        //lowerPanel.repaint();
-        //lowerPanel.revalidate();
-        
-        
-//        ChartCreator creator1 = new BarChartCreator();
-//        ChartDecorator decorator1 = new BarChartDecorator();
-//        JFreeChart chart1 = creator1.createChart(new ArrayList<Integer>());
-//        decorator1.decorateChart(chart1);
-//        decorator.createChartPanel(new ArrayList<Integer>());
-//        
-//        ChartDecorator d1 = new BarChartDecorator();
-//        d1.createChartPanel(new ArrayList<Integer>());
-        
-//        GraphFrame test = new GraphFrame();
-//        test.setVisible(true);
-//        test.createChart(new ArrayList<Integer>());
-        //ArrayList <Integer> list1 = new ArrayList<Integer>();
-        //frame.createChart(list1);
-//        lowerPanel.setLayout(new BorderLayout());
-//        lowerPanel.removeAll();
-//        lowerPanel.updateUI();
-//        GraphCreator d = new LineGraphCreator();
-//        ArrayList <Integer> list = new ArrayList<Integer>();
-//        lowerPanel.add(BorderLayout.CENTER,d.createChart(list)); 
-//        lowerPanel.repaint();
-//        lowerPanel.revalidate();
-        
-        //lowerPanel.add(d.createChart(list));
-        
-//        
-//        if(bidPriceCheckBox.isSelected()){
-//            //new BidPriceDecorator(panel).decoratePanel();
-//            GridBagConstraints c = new GridBagConstraints();
-//            c.fill = GridBagConstraints.VERTICAL;
-//
-//            JLabel label = new JLabel("Button 2");
-//            c.weightx = 0;
-//        
-//            c.fill = GridBagConstraints.VERTICAL;
-//            c.gridx = 0;
-//            c.gridy = 1;
-//            lowerPanel.add(label, c);
-//        }
-//        
-//        if(statusCheckBox.isSelected()){
-//            GridBagConstraints c = new GridBagConstraints();
-//            c.fill = GridBagConstraints.VERTICAL;
-//
-//            JLabel label = new JLabel("Button 3");
-//            c.weightx = 0;
-//        
-//            c.fill = GridBagConstraints.VERTICAL;
-//            c.gridx = 0;
-//            c.gridy = 2;
-//            lowerPanel.add(label, c);
-//        }
-//        
-//        JButton button;
-//        //lowerPanel.setLayout(new GridBagLayout());
-//        GridBagConstraints c = new GridBagConstraints();
-//        c.fill = GridBagConstraints.VERTICAL;
-//
-//        button = new JButton("Button 1");
-//        c.weightx = 0;
-//        
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.gridx = 0;
-//        c.gridy = 0;
-//        lowerPanel.add(button, c);
-// 
-//        button = new JButton("Button 2");
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.weightx = 0.5;
-//        c.gridx = 1;
-//        c.gridy = 0;
-//        lowerPanel.add(button, c);
-//        //add(panel);
-//        
-//        button = new JButton("Button 3");
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.weightx = 0.5;
-//        c.gridx = 2;
-//        c.gridy = 0;
-//        lowerPanel.add(button, c);
-        lowerPanel.revalidate();
-//        decoratedPanel.removeAll();
-//        decoratedPanel.setLayout(new BoxLayout(decoratedPanel, BoxLayout.Y_AXIS));
-//        if(currentPriceCheckBox.isSelected()){
-//            JLabel currentPriceLabel = new JLabel("Current Price :");
-//            decoratedPanel.add(currentPriceLabel);
-//        }
-//        
-//        if(bidPriceCheckBox.isSelected()){
-//            JLabel bidPriceLabel = new JLabel("Current Bid Price :");
-//            decoratedPanel.add(bidPriceLabel);
-//        }
-//        
-//        if(statusCheckBox.isSelected()){
-//            JLabel status = new JLabel("Status :");
-//            decoratedPanel.add(status);
-//        }
-//        
-//        if(barGraphCheckBox.isSelected()){
-//            JLabel barGraphLabel = new JLabel("Bar Graph :");
-//            decoratedPanel.add(barGraphLabel);
-//        }
-//        
-//        if(lineGraphCheckBox.isSelected()){
-//            JLabel lineGraphLabel = new JLabel("Line Graph :");
-//            decoratedPanel.add(lineGraphLabel);
-//        }
-//        
-//        decoratedPanel.repaint();
-//        decoratedPanel.revalidate();
+        if(barGraphCheckBox.isSelected()){
+            ChartJFrame chartFrame = new ChartJFrame(new BarChartCreator());
+            Thread thread = new Thread(chartFrame);
+            thread.start();
+            stock.addObserver(chartFrame);
+        }
     }//GEN-LAST:event_doneButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomObserver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomObserver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomObserver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomObserver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomObserver().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox availableStockComboBox;

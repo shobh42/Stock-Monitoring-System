@@ -1,5 +1,3 @@
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,7 +12,7 @@ import java.util.TreeMap;
  * @author Shobhit
  */
 public class AvailableStock {
-    //To maintain the order of the stocks, we have user tree map
+    //To maintain the order of the stocks, I have used tree map
     private Map<String, Stock> stocks = new TreeMap<String, Stock>();
     
     public AvailableStock(){

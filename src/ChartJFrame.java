@@ -1,6 +1,15 @@
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,14 +21,17 @@ import java.awt.Component;
  *
  * @author Shobhit
  */
-public class ChartJFrame extends javax.swing.JFrame {
+public class ChartJFrame extends javax.swing.JFrame implements Runnable, Observer {
 
-    /**
-     * Creates new form Test
-     */
-    public ChartJFrame() {
+    private ChartCreator chartCreator;
+    private List<Integer> points;
+    
+    public ChartJFrame(ChartCreator chartCreator){
         initComponents();
+        this.chartCreator = chartCreator;
+        points = new ArrayList<Integer>();
         chartJPanel.setLayout(new BorderLayout());
+        setVisible(true);
     }
 
     /**
@@ -71,48 +83,71 @@ public class ChartJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChartJFrame().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ChartJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ChartJFrame().setVisible(true);
+//            }
+//        });
+//    }
     
-    public Component add(Component component){
-        chartJPanel.add(component);
+    public void showChart(){
+        if(points.size() == 0) return;
+        
+        JFreeChart chart = chartCreator.createChart(points);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartJPanel.removeAll();
+        chartJPanel.updateUI();
+        chartJPanel.add(BorderLayout.CENTER, chartPanel); 
         chartJPanel.repaint();
         chartJPanel.revalidate();
-        return null;
     }
-    
+
+    @Override
+    public void update(Subject stock) {
+        Stock s = (Stock)stock;
+        int currentPrice = s.getCurrentPrice();
+        points.add(currentPrice);
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            try {
+                showChart();
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ChartJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartJPanel;

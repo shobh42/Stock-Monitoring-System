@@ -6,12 +6,8 @@
 
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.JFrame;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -30,18 +26,22 @@ public abstract class ChartCreator {
     
     public JFreeChart createChart(List<Integer> points){
         
-        dataset = createDataset(points);
+        dataset = DataSetCreator.createDataset(points);
         JFreeChart chart = getChart();
         chart.setBackgroundPaint(Color.WHITE);
     
-        final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);
        
         ValueAxis yAxis = plot.getRangeAxis();
         if(points.size()<=10){
-            yAxis.setRange(Collections.min(points)-20,Collections.max(points)+5);
+            int minRange = Collections.min(points)-20;
+            int maxRange = Collections.max(points)+5;
+            yAxis.setRange(minRange, maxRange);
         }else{
-            yAxis.setRange(Collections.min(points.subList(points.size()-10, points.size()))-20,Collections.max(points.subList(points.size()-10, points.size()))+5);
+            int minRange = Collections.min(points.subList(points.size()-10, points.size()))-20;
+            int maxRange = Collections.max(points.subList(points.size()-10, points.size()))+5;
+            yAxis.setRange(minRange, maxRange);
         }
         
         setPlotColor(plot);
@@ -54,30 +54,9 @@ public abstract class ChartCreator {
         plot.getDomainAxis().setTickMarksVisible(false);
         plot.getDomainAxis().setTickLabelsVisible(false);
         return chart;
-        //return chartPanel;
     }
     
     public abstract JFreeChart getChart();
     
     public abstract void setPlotColor(CategoryPlot plot);
-    
-    public DefaultCategoryDataset createDataset(List<Integer> points){
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        String series1 = "";
-        if(points.size()<=10){
-            for(int i= 0  ;i<points.size();i++){
-                int number = points.get(i);
-                dataset.addValue(number, series1, ""+i);
-            }
-        }else{
-            for(int i= points.size()-10  ;i<points.size();i++){
-                int number = points.get(i);
-                dataset.addValue(number, series1, ""+i);
-        } 
-    }
-       
-    return dataset;
-        
-    }
-   
 }

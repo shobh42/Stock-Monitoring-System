@@ -18,7 +18,6 @@ public class LineChartCreator extends ChartCreator {
 
     @Override
     public JFreeChart getChart() {
-        //return ChartFactory.createLineChart(chartTitle,  categoryAxisLabel, valueAxisLabel,dataset);
         return ChartFactory.createLineChart(chartTitle, categoryAxisLabel, valueAxisLabel, dataset);
     }
     

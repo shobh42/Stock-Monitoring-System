@@ -14,7 +14,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class DataSetCreator {
     
-    public static DefaultCategoryDataset createDataset(List<Integer> points){
+    public DefaultCategoryDataset createDataset(List<Integer> points){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String series1 = "";
         if(points.size()<=10){

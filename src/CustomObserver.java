@@ -226,14 +226,14 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
         }
 
         if(lineGraphCheckBox.isSelected()){
-            ChartJFrame chartFrame = new ChartJFrame(new LineChartCreator());
+            ChartFrame chartFrame = new LineChartFrame();
             Thread thread = new Thread(chartFrame);
             thread.start();
             stock.addObserver(chartFrame);
         }
         
         if(barGraphCheckBox.isSelected()){
-            ChartJFrame chartFrame = new ChartJFrame(new BarChartCreator());
+            ChartFrame chartFrame = new BarChartFrame();
             Thread thread = new Thread(chartFrame);
             thread.start();
             stock.addObserver(chartFrame);

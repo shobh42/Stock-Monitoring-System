@@ -12,7 +12,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -23,10 +22,10 @@ public abstract class ChartCreator {
     protected String categoryAxisLabel = null;
     protected String valueAxisLabel = null;
     protected CategoryDataset dataset;
+    private DataSetCreator datasetCreator = new DataSetCreator();
     
     public JFreeChart createChart(List<Integer> points){
-        
-        dataset = DataSetCreator.createDataset(points);
+        dataset = datasetCreator.createDataset(points);
         JFreeChart chart = getChart();
         chart.setBackgroundPaint(Color.WHITE);
     

@@ -21,12 +21,12 @@ import org.jfree.chart.JFreeChart;
  *
  * @author Shobhit
  */
-public class ChartJFrame extends javax.swing.JFrame implements Runnable, Observer {
+public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer {
 
     private ChartCreator chartCreator;
     private List<Integer> points;
     
-    public ChartJFrame(ChartCreator chartCreator){
+    public ChartFrame(ChartCreator chartCreator){
         initComponents();
         this.chartCreator = chartCreator;
         points = new ArrayList<Integer>();
@@ -144,7 +144,7 @@ public class ChartJFrame extends javax.swing.JFrame implements Runnable, Observe
                 showChart();
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(ChartJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ChartFrame.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
     }

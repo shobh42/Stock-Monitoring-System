@@ -58,6 +58,9 @@
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="valuesPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

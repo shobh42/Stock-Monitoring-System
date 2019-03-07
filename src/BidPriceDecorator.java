@@ -16,8 +16,8 @@ import javax.swing.JPanel;
  */
 public class BidPriceDecorator extends PanelDecorator {
 
-    public BidPriceDecorator(DecoratedPanel panel){
-        super(panel);
+    public BidPriceDecorator(DecoratedPanel panel, Subject subject){
+        super(panel, subject);
     }
     
     @Override

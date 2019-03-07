@@ -1,11 +1,5 @@
 
 import java.util.Set;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,13 +16,6 @@ public class StockMonitoringSystemMainPanel extends javax.swing.JFrame{
     private DefaultTableModelObserver stockMainTableModel;
     Communicator communicator;
 
-    /**
-     * Creates new form StockMonitoringSystemMainPanel
-     */
-    public StockMonitoringSystemMainPanel(){
-        
-    }
-    
     public StockMonitoringSystemMainPanel(Portfolio portfolio) {
         initComponents();
         this.portfolio = portfolio;
@@ -160,43 +147,8 @@ public class StockMonitoringSystemMainPanel extends javax.swing.JFrame{
     }//GEN-LAST:event_stopButtonActionPerformed
 
     private void createCustomObserverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCustomObserverButtonActionPerformed
-        new CustomObserver(portfolio).setVisible(true);
+        new CustomObserverOne(portfolio).setVisible(true);
     }//GEN-LAST:event_createCustomObserverButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StockMonitoringSystemMainPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StockMonitoringSystemMainPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StockMonitoringSystemMainPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StockMonitoringSystemMainPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StockMonitoringSystemMainPanel().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createCustomObserverButton;

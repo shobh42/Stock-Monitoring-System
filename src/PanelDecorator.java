@@ -1,4 +1,5 @@
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
@@ -11,12 +12,16 @@ import javax.swing.JPanel;
  *
  * @author Shobhit
  */
-public class PanelDecorator extends JPanel{
+public class PanelDecorator extends DecoratedPanel{
     
     protected DecoratedPanel panel;
+    protected Subject subject;
+    protected JLabel valueLabel;
     
-    public PanelDecorator(DecoratedPanel panel){
+    public PanelDecorator(DecoratedPanel panel, Subject subject){
         this.panel = panel;
+        this.subject = subject;
+        valueLabel = new JLabel("");
     }
     
     public DecoratedPanel decoratePanel(){

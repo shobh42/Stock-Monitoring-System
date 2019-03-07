@@ -209,6 +209,12 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
         Stock stock = portfolio.getStock(symbol);
         stock.addObserver(this);
         
+        DecoratedPanel panel = new DecoratedPanel();
+        PanelDecorator decoratorWrapper = new PanelDecorator(panel, stock);
+        panel = new CurrentPriceDecorator(panel, stock);
+        panel = new BidPriceDecorator(panel, stock);
+        panel = new CurrentPriceDecorator(panel, stock);
+        
         if(currentPriceCheckBox.isSelected()){
             //panelDecorator = new CurrentPriceDecorator(panelDecorator);
             jLabel1.setVisible(true);
@@ -266,12 +272,5 @@ public class CustomObserver extends javax.swing.JFrame implements Observer {
     public void update(Subject stock) {
         Stock s = (Stock) stock;
         
-        if(jLabel2.isVisible()){
-            jLabel4.setText(Integer.toString(s.getCurrentPrice()));
-        }
-        
-        if(jLabel4.isVisible()){
-            jLabel5.setText(Integer.toString(s.getBidPrice()));
-        }
     }
 }

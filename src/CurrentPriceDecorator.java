@@ -14,10 +14,10 @@ import javax.swing.JPanel;
  *
  * @author Shobhit
  */
-public class CurrentPriceDecorator extends PanelDecorator {
+public class CurrentPriceDecorator extends PanelDecorator implements Observer {
 
-    public CurrentPriceDecorator(DecoratedPanel panel){
-        super(panel);
+    public CurrentPriceDecorator(DecoratedPanel panel, Subject subject){
+        super(panel, subject);
     }
     
     @Override
@@ -34,5 +34,11 @@ public class CurrentPriceDecorator extends PanelDecorator {
         c.gridy = 0;
         panel.add(label, c);
         return panel;
+    }
+
+    @Override
+    public void update(Subject subject) {
+        Stock s = (Stock) subject;
+        valueLabel.setText(Integer.toString(s.getCurrentPrice()));
     }
 }

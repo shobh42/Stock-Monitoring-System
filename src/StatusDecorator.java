@@ -14,8 +14,8 @@ import javax.swing.JPanel;
  */
 public class StatusDecorator extends PanelDecorator {
 
-    public StatusDecorator(DecoratedPanel panel){
-        super(panel);
+    public StatusDecorator(DecoratedPanel panel, Subject subject){
+        super(panel, subject);
     }
     
     @Override

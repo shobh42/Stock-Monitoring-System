@@ -18,14 +18,11 @@ import javax.swing.JLabel;
  */
 public class ObserverFrame extends javax.swing.JFrame implements Observer{
 
-    private Portfolio portfolio;
-    private Subject previousSubject;
+    protected Portfolio portfolio;
+    protected Subject previousSubject;
     /**
      * Creates new form ObserverFrame
      */
-    public ObserverFrame() {
-    }
-    
     public ObserverFrame(Portfolio portfolio) {
         initComponents();
         this.portfolio = portfolio;
@@ -207,38 +204,6 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ObserverFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ObserverFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ObserverFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ObserverFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ObserverFrame().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel askPriceLabel;
     private javax.swing.JLabel askPriceValueLabel;
@@ -253,7 +218,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel openingPriceValueLabel;
     private javax.swing.JLabel tenDayVolumeLabel;
     private javax.swing.JLabel tenDayVolumeValueLabel;
-    private javax.swing.JPanel valuesPanel;
+    protected javax.swing.JPanel valuesPanel;
     private javax.swing.JLabel volumePriceLabel;
     private javax.swing.JLabel volumePriceValueLabel;
     // End of variables declaration//GEN-END:variables

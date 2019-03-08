@@ -1,15 +1,9 @@
 package observer;
 
-
 import util.Portfolio;
 import subject.Subject;
 import subject.Stock;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,7 +39,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         availableStockComboBox = new javax.swing.JComboBox();
-        valuesPanel = new javax.swing.JPanel();
+        stocksUpdatePanel = new javax.swing.JPanel();
         currentPriceLabel = new javax.swing.JLabel();
         currentPriceValueLabel = new javax.swing.JLabel();
         openingPriceLabel = new javax.swing.JLabel();
@@ -98,72 +92,72 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
 
         tenDayVolumeValueLabel.setText("Ten Day Volume Value");
 
-        javax.swing.GroupLayout valuesPanelLayout = new javax.swing.GroupLayout(valuesPanel);
-        valuesPanel.setLayout(valuesPanelLayout);
-        valuesPanelLayout.setHorizontalGroup(
-            valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(valuesPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout stocksUpdatePanelLayout = new javax.swing.GroupLayout(stocksUpdatePanel);
+        stocksUpdatePanel.setLayout(stocksUpdatePanelLayout);
+        stocksUpdatePanelLayout.setHorizontalGroup(
+            stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addComponent(closingPriceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(closingPriceValueLabel))
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addComponent(askPriceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(askPriceValueLabel))
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addComponent(bidPriceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bidPriceValueLabel))
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addComponent(volumePriceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(volumePriceValueLabel))
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addComponent(tenDayVolumeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tenDayVolumeValueLabel))
-                    .addGroup(valuesPanelLayout.createSequentialGroup()
-                        .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
+                        .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(currentPriceLabel)
                             .addComponent(openingPriceLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(openingPriceValueLabel)
                             .addComponent(currentPriceValueLabel))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        valuesPanelLayout.setVerticalGroup(
-            valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(valuesPanelLayout.createSequentialGroup()
+        stocksUpdatePanelLayout.setVerticalGroup(
+            stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(currentPriceLabel)
                     .addComponent(currentPriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(openingPriceLabel)
                     .addComponent(openingPriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closingPriceLabel)
                     .addComponent(closingPriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(askPriceLabel)
                     .addComponent(askPriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bidPriceLabel)
                     .addComponent(bidPriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(volumePriceLabel)
                     .addComponent(volumePriceValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(valuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tenDayVolumeLabel)
                     .addComponent(tenDayVolumeValueLabel))
                 .addContainerGap(102, Short.MAX_VALUE))
@@ -176,7 +170,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(valuesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stocksUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(availableStockComboBox, 0, 388, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -186,7 +180,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
                 .addContainerGap()
                 .addComponent(availableStockComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(valuesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(stocksUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -221,9 +215,9 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel currentPriceValueLabel;
     private javax.swing.JLabel openingPriceLabel;
     private javax.swing.JLabel openingPriceValueLabel;
+    protected javax.swing.JPanel stocksUpdatePanel;
     private javax.swing.JLabel tenDayVolumeLabel;
     private javax.swing.JLabel tenDayVolumeValueLabel;
-    protected javax.swing.JPanel valuesPanel;
     private javax.swing.JLabel volumePriceLabel;
     private javax.swing.JLabel volumePriceValueLabel;
     // End of variables declaration//GEN-END:variables

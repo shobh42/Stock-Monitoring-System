@@ -29,7 +29,6 @@ public class BidPriceDecorator extends FrameDecorator{
         c.gridx = 1;
         c.gridy = 9;
         panel.add(valueLabel, c);
-        panel.remove(valueLabel);
     }
     
     @Override

@@ -1,10 +1,9 @@
 package observer;
-
-
 import util.Portfolio;
 import chartcreator.BarChartFrame;
 import chartcreator.LineChartFrame;
 import chartcreator.ChartFrame;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import subject.Subject;
 import subject.Stock;
 import decorator.OpeningPriceDecorator;
@@ -24,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,20 +55,23 @@ public class CustomObserver extends ObserverFrame{
     public CustomObserver(Portfolio portfolio) {
         super(portfolio);
         decorators = new ArrayList<FrameDecorator>();
-        valuesPanel.removeAll();
-        valuesPanel.setSize(250, 250);
-        valuesPanel.setLayout(new GridBagLayout());
+        updatePanel();
         AddCheckBoxToPanel();
     }
-
+    
+    private void updatePanel() {
+        stocksUpdatePanel.removeAll();
+        stocksUpdatePanel.setSize(250, 250);
+        stocksUpdatePanel.setLayout(new GridBagLayout());
+    }
+    
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String selectedItem = availableStockComboBox.getSelectedItem().toString();
-        // If the subject is changed, frame should be removed from the observer and frame should subscribe to new stock.
         String symbol = selectedItem.split(",")[0];
-        decorators = new ArrayList<FrameDecorator>();
         
-        //Remove all the prevoius decorators
-               
+        //Remove all the prevoius decorators so that the frame will show only current decorators
+        removePreviousDecorator();
+        decorators = new ArrayList<FrameDecorator>();
         Stock stock = portfolio.getStock(symbol);
         stock.addObserver(this);
         FrameDecorator decorator = null;
@@ -130,8 +130,7 @@ public class CustomObserver extends ObserverFrame{
         }
         
         decoratePanel();
-        valuesPanel.repaint();
-        valuesPanel.revalidate();
+        repaintPanel();
     }                                          
     
     @Override
@@ -149,7 +148,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         currentPriceCheckBox = new JCheckBox("Current Price");
-        valuesPanel.add(currentPriceCheckBox, c);
+        stocksUpdatePanel.add(currentPriceCheckBox, c);
         
         
         c = new GridBagConstraints();
@@ -159,7 +158,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         openingPriceCheckBox = new JCheckBox("Opening Price");
-        valuesPanel.add(openingPriceCheckBox, c);
+        stocksUpdatePanel.add(openingPriceCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -168,7 +167,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 20;
         c.ipady = 2;
         closingPriceCheckBox = new JCheckBox("Closing Price");
-        valuesPanel.add(closingPriceCheckBox, c);
+        stocksUpdatePanel.add(closingPriceCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -177,7 +176,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         bidPriceCheckBox = new JCheckBox("Bid Price");
-        valuesPanel.add(bidPriceCheckBox, c);
+        stocksUpdatePanel.add(bidPriceCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -186,7 +185,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         statusCheckBox = new JCheckBox("Status");
-        valuesPanel.add(statusCheckBox, c);
+        stocksUpdatePanel.add(statusCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -196,7 +195,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 20;
         c.ipady = 2;
         askPriceCheckBox = new JCheckBox("Ask Price");
-        valuesPanel.add(askPriceCheckBox, c);
+        stocksUpdatePanel.add(askPriceCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -206,7 +205,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         volumeCheckBox = new JCheckBox("Current Volume");
-        valuesPanel.add(volumeCheckBox, c);
+        stocksUpdatePanel.add(volumeCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -216,7 +215,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         tenDayVolumeCheckBox = new JCheckBox("Ten Day Volume");
-        valuesPanel.add(tenDayVolumeCheckBox, c);
+        stocksUpdatePanel.add(tenDayVolumeCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -226,7 +225,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 20;
         c.ipady = 2;
         lineChartCheckBox = new JCheckBox("Line Chart");
-        valuesPanel.add(lineChartCheckBox, c);
+        stocksUpdatePanel.add(lineChartCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -236,7 +235,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         barChartCheckBox = new JCheckBox("Bar Chart");
-        valuesPanel.add(barChartCheckBox, c);
+        stocksUpdatePanel.add(barChartCheckBox, c);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -246,21 +245,32 @@ public class CustomObserver extends ObserverFrame{
         c.ipadx = 30;
         c.ipady = 2;
         doneButton = new JButton("Done");
-        valuesPanel.add(doneButton, c);
+        stocksUpdatePanel.add(doneButton, c);
         doneButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doneButtonActionPerformed(e);
             }
         } );
 
-
-        valuesPanel.repaint();
-        valuesPanel.revalidate();
+        stocksUpdatePanel.repaint();
+        stocksUpdatePanel.revalidate();
     }
 
     private void decoratePanel() {
         for(FrameDecorator decorator: decorators){
-            decorator.decorate(valuesPanel);
+            decorator.decorate(stocksUpdatePanel);
         }
+    }
+
+    private void removePreviousDecorator() {
+        for(FrameDecorator decorator: decorators){
+            decorator.removeLabel(stocksUpdatePanel);
+            repaintPanel();
+        }    
+    }
+
+    private void repaintPanel() {
+        stocksUpdatePanel.repaint();
+        stocksUpdatePanel.revalidate();
     }
 }

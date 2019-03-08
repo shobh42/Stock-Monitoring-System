@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -48,6 +49,7 @@ public class CustomObserver extends ObserverFrame{
     private JCheckBox barChartCheckBox;
     private JButton doneButton;
     private List<FrameDecorator> decorators;
+    private List<JCheckBox> checkbox;
     
     /**
      * Creates new form CustomObserver
@@ -149,7 +151,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         currentPriceCheckBox = new JCheckBox("Current Price");
         stocksUpdatePanel.add(currentPriceCheckBox, c);
-        
+        checkbox.add(currentPriceCheckBox);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -159,7 +161,8 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         openingPriceCheckBox = new JCheckBox("Opening Price");
         stocksUpdatePanel.add(openingPriceCheckBox, c);
-        
+        checkbox.add(openingPriceCheckBox);
+                
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
@@ -168,6 +171,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         closingPriceCheckBox = new JCheckBox("Closing Price");
         stocksUpdatePanel.add(closingPriceCheckBox, c);
+        checkbox.add(closingPriceCheckBox);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -177,6 +181,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         bidPriceCheckBox = new JCheckBox("Bid Price");
         stocksUpdatePanel.add(bidPriceCheckBox, c);
+        checkbox.add(bidPriceCheckBox);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -186,9 +191,9 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         statusCheckBox = new JCheckBox("Status");
         stocksUpdatePanel.add(statusCheckBox, c);
+        checkbox.add(statusCheckBox);
         
         c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
         c.gridy = 1;
@@ -196,9 +201,9 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         askPriceCheckBox = new JCheckBox("Ask Price");
         stocksUpdatePanel.add(askPriceCheckBox, c);
+        checkbox.add(askPriceCheckBox);
         
         c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 2;
@@ -206,6 +211,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         volumeCheckBox = new JCheckBox("Current Volume");
         stocksUpdatePanel.add(volumeCheckBox, c);
+        checkbox.add(volumeCheckBox);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -216,6 +222,7 @@ public class CustomObserver extends ObserverFrame{
         c.ipady = 2;
         tenDayVolumeCheckBox = new JCheckBox("Ten Day Volume");
         stocksUpdatePanel.add(tenDayVolumeCheckBox, c);
+        checkbox.add(tenDayVolumeCheckBox);
         
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;

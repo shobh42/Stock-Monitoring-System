@@ -1,18 +1,21 @@
 package chartcreator;
 
 
+import DatasetValues.AskPriceDatasetValue;
+import DatasetValues.BidPriceDatasetValue;
+import DatasetValues.ClosingPriceDatasetValue;
+import DatasetValues.CurrentPriceDatasetValue;
+import DatasetValues.DatasetValue;
+import DatasetValues.OpeningPriceDatasetValue;
+import DatasetValues.TenDayVolumeDatasetValue;
+import DatasetValues.VolumePriceDatasetValue;
 import observer.Observer;
 import subject.Subject;
 import subject.Stock;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -29,29 +32,29 @@ import org.jfree.chart.JFreeChart;
 public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer {
 
     private ChartCreator chartCreator;
-    private List<Integer> currentPrice;
-    private List<Integer> openingPrice;
-    private List<Integer> closingPrice;
-    private List<Integer> askPrice;
-    private List<Integer> bidPrice;
-    private List<Integer> volumePrice;
-    private List<Integer> tenDayVolumePrice;
-    private List<Integer> currentPoints;
+    private DatasetValue currentPrice;
+    private DatasetValue openingPrice;
+    private DatasetValue closingPrice;
+    private DatasetValue askPrice;
+    private DatasetValue bidPrice;
+    private DatasetValue volumePrice;
+    private DatasetValue tenDayVolumePrice;
+    private DatasetValue currentPoint;
+    private int numberOfPoints = 10;
     
     public ChartFrame(ChartCreator chartCreator){
         initComponents();
         this.chartCreator = chartCreator;
-        currentPrice = new ArrayList<Integer>();
-        openingPrice = new ArrayList<Integer>();
-        closingPrice = new ArrayList<Integer>();
-        askPrice = new ArrayList<Integer>();
-        bidPrice = new ArrayList<Integer>();
-        volumePrice = new ArrayList<Integer>();
-        tenDayVolumePrice = new ArrayList<Integer>();
-        currentPoints = currentPrice;
+        currentPrice = new CurrentPriceDatasetValue();
+        openingPrice = new OpeningPriceDatasetValue();
+        closingPrice = new ClosingPriceDatasetValue();
+        askPrice = new AskPriceDatasetValue();
+        bidPrice = new BidPriceDatasetValue();
+        volumePrice = new VolumePriceDatasetValue();
+        tenDayVolumePrice = new TenDayVolumeDatasetValue();
+        currentPoint = currentPrice;
         chartJPanel.setLayout(new BorderLayout());
         setVisible(true);
-        setResizable(false);
     }
 //
 //    /**
@@ -86,6 +89,8 @@ public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer
         );
 
         priceOptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Current Price","Opening Price", "Closing Price", "Ask Price", "Bid Price", "Volume Price", "Ten Day Volume"}));
+
+        numberOfPointsTextField.setText("10");
 
         jLabel1.setText("Number of update");
 
@@ -146,38 +151,44 @@ public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer
         
         int index = priceOptionComboBox.getSelectedIndex();
         if(index == 0){
-            currentPoints = currentPrice;
+            currentPoint = currentPrice;
         }
         
         if(index == 1){
-            currentPoints = openingPrice;
+            currentPoint = openingPrice;
         }
         
         if(index == 2){
-            currentPoints = closingPrice;
+            currentPoint = closingPrice;
         }
         
         if(index == 3){
-            currentPoints = askPrice;
+            currentPoint = askPrice;
         }
         
         if(index == 4){
-            currentPoints = bidPrice;
+            currentPoint = bidPrice;
         }
         
         if(index == 5){
-            currentPoints = volumePrice;
+            currentPoint = volumePrice;
         }
         
         if(index == 6){
-            currentPoints = tenDayVolumePrice;
+            currentPoint = tenDayVolumePrice;
         }
+        
+        try {  
+            numberOfPoints = (int) Double.parseDouble(numberOfPointsTextField.getText());  
+        } catch(NumberFormatException e){  
+            JOptionPane.showMessageDialog(this, "Please enter a valid number.");  
+        }  
     }//GEN-LAST:event_showButtonActionPerformed
 
     public void showChart(){
-        if(currentPrice.size() == 0) return;
+        if(currentPoint.getValues().size() == 0) return;
         
-        JFreeChart chart = chartCreator.createChart(currentPoints);
+        JFreeChart chart = chartCreator.createChart(currentPoint, numberOfPoints);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartJPanel.removeAll();
         chartJPanel.updateUI();

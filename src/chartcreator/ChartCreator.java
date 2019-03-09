@@ -7,6 +7,7 @@ package chartcreator;
  */
 
 
+import DatasetValues.DatasetValue;
 import util.DataSetCreator;
 import java.awt.Color;
 import java.util.Collections;
@@ -21,14 +22,16 @@ import org.jfree.data.category.CategoryDataset;
  * @author Shobhit
  */
 public abstract class ChartCreator {
-    protected String chartTitle = "Current Price";
+    protected String chartTitle;
     protected String categoryAxisLabel = null;
     protected String valueAxisLabel = null;
     protected CategoryDataset dataset;
     private DataSetCreator datasetCreator = new DataSetCreator();
     
-    public JFreeChart createChart(List<Integer> points){
-        dataset = datasetCreator.createDataset(points);
+    public JFreeChart createChart(DatasetValue currentDataset, int numOfPoints){
+        List<Integer> points = currentDataset.getValues();
+        chartTitle = currentDataset.toString();
+        dataset = datasetCreator.createDataset(points, numOfPoints);
         JFreeChart chart = getChart();
         chart.setBackgroundPaint(Color.WHITE);
     
@@ -36,13 +39,13 @@ public abstract class ChartCreator {
         plot.setBackgroundPaint(Color.WHITE);
        
         ValueAxis yAxis = plot.getRangeAxis();
-        if(points.size()<=10){
+        if(points.size()<=numOfPoints){
             int minRange = Collections.min(points)-20;
             int maxRange = Collections.max(points)+5;
             yAxis.setRange(minRange, maxRange);
         }else{
-            int minRange = Collections.min(points.subList(points.size()-10, points.size()))-20;
-            int maxRange = Collections.max(points.subList(points.size()-10, points.size()))+5;
+            int minRange = Collections.min(points.subList(points.size()-numOfPoints, points.size()))-20;
+            int maxRange = Collections.max(points.subList(points.size()-numOfPoints, points.size()))+5;
             yAxis.setRange(minRange, maxRange);
         }
         

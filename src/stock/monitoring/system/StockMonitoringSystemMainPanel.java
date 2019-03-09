@@ -3,7 +3,7 @@ package stock.monitoring.system;
 
 import util.Portfolio;
 import util.Communicator;
-import util.DefaultTableModelObserver;
+import observer.DefaultTableModelObserver;
 import observer.ObserverFrame;
 import observer.CustomObserver;
 import subject.Stock;

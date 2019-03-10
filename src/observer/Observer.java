@@ -1,6 +1,5 @@
 package observer;
 
-
 import subject.Subject;
 
 /*

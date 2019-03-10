@@ -1,8 +1,6 @@
 package decorator;
 import subject.Subject;
 import subject.Stock;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
@@ -26,6 +24,5 @@ public class OpeningPriceDecorator extends FrameDecorator{
     public void update(Subject subject) {
         Stock stock = (Stock) subject;
         valueLabel.setText(Integer.toString(stock.getOpeningPrice()));
-    }
-    
+    }    
 }

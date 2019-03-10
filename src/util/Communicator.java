@@ -15,10 +15,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,7 +23,6 @@ import javax.swing.JOptionPane;
  */
 public class Communicator {
     private DatagramSocket udpClient ;
-    private Socket socket;
     private InetAddress address;
     private boolean isMonitoring;
     private Portfolio userPortFolio;
@@ -45,14 +40,13 @@ public class Communicator {
             udpClient = new DatagramSocket();
             udpClient.setSoTimeout(2000);
             isMonitoring = true;
-
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        
         monitoring();
-
     }
 
     public void monitoring(){
@@ -76,9 +70,7 @@ public class Communicator {
             }
             catch (Exception e)
             {
-                //JOptionPane.showMessageDialog(null, "No response from server");
-            
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
@@ -153,9 +145,5 @@ public class Communicator {
     public boolean checkForUnknownSymbol(){
         return timeOut == true;
         
-    }
-    
-    public boolean correctIPAddress(String ip){
-        return ip == "169.254.56.42" || ip=="169.254.91.179" || ip=="10.0.0.158" ||ip=="169.254.195.23"||ip=="127.0.0.1"||ip=="52.42.233.246";
     }
 }

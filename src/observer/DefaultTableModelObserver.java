@@ -22,13 +22,11 @@ public class DefaultTableModelObserver extends DefaultTableModel implements Obse
 
     private Icon upIcon;
     private Icon downIcon;
-    private Icon idleIcon;
     private Map<String, Integer> stockRowMapping;
 
     public DefaultTableModelObserver() {
         upIcon = new ImageIcon("upIcon.jpg");
         downIcon = new ImageIcon("downIcon.jpg");
-        idleIcon = new ImageIcon("idle.jpg");
         stockRowMapping = new HashMap<>();
     }
 

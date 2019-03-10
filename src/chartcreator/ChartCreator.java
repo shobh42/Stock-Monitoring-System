@@ -39,7 +39,7 @@ public abstract class ChartCreator {
         plot.setBackgroundPaint(Color.WHITE);
        
         ValueAxis yAxis = plot.getRangeAxis();
-        if(points.size()<=numOfPoints){
+        if(points.size()<= numOfPoints){
             int minRange = Collections.min(points)-20;
             int maxRange = Collections.max(points)+5;
             yAxis.setRange(minRange, maxRange);
@@ -50,6 +50,15 @@ public abstract class ChartCreator {
         }
         
         setPlotColor(plot);
+        updatePlotSetting(plot);
+        return chart;
+    }
+    
+    public abstract JFreeChart getChart();
+    
+    public abstract void setPlotColor(CategoryPlot plot);
+
+    private void updatePlotSetting(CategoryPlot plot) {
         plot.getDomainAxis();
         plot.setOutlineVisible(false);
         plot.setRangeGridlinePaint(Color.white);
@@ -58,10 +67,5 @@ public abstract class ChartCreator {
         plot.getDomainAxis().setAxisLineVisible(true);
         plot.getDomainAxis().setTickMarksVisible(false);
         plot.getDomainAxis().setTickLabelsVisible(false);
-        return chart;
     }
-    
-    public abstract JFreeChart getChart();
-    
-    public abstract void setPlotColor(CategoryPlot plot);
 }

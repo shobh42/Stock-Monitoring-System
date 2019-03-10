@@ -1,9 +1,6 @@
 package decorator;
 import subject.Subject;
 import subject.Stock;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*

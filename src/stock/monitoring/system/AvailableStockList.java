@@ -4,12 +4,9 @@ package stock.monitoring.system;
 import util.Portfolio;
 import stock.monitoring.system.StockMonitoringSystemMainPanel;
 import subject.Stock;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Map;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

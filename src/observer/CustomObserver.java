@@ -97,9 +97,9 @@ public class CustomObserver extends ObserverFrame{
         for(FrameDecorator decorator: decorators){
             decorator.update(stock);
         }
+        
         stocksUpdatePanel.repaint();
         stocksUpdatePanel.revalidate();
-        
     }
 
     private void AddCheckBoxToPanel() {

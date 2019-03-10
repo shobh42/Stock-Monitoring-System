@@ -92,9 +92,7 @@ public class Stock implements Subject {
     public void notifyAllObserver() {
         for(Observer observer : observers){
             observer.update(this);
-        } 
-        
-        //System.out.println(this);
+        }
     }
 
     @Override

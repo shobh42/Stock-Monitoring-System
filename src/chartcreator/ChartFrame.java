@@ -146,6 +146,7 @@ public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer
         if(currentDataset.getValues().size() == 0){
             return;
         }
+        
         JFreeChart chart = chartCreator.createChart(currentDataset, numberOfPoints);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartJPanel.removeAll();

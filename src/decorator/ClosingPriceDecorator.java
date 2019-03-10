@@ -24,6 +24,5 @@ public class ClosingPriceDecorator extends FrameDecorator{
     public void update(Subject subject) {
         Stock stock = (Stock) subject;
         valueLabel.setText(Integer.toString(stock.getClosingPrice()));
-    }
-    
+    }   
 }

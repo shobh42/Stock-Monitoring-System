@@ -1,6 +1,5 @@
 package util;
 
-
 import java.util.List;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -19,15 +18,15 @@ public class DataSetCreator {
     public DefaultCategoryDataset createDataset(List<Integer> points, int numOfPoints){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String series1 = "";
-        if(points.size()<=numOfPoints){
-            for(int i= 0  ;i<points.size();i++){
+        if(points.size() <= numOfPoints){
+            for(int i = 0; i < points.size(); i++){
                 int number = points.get(i);
-                dataset.addValue(number, series1, ""+i);
+                dataset.addValue(number, series1, "" + i);
             }
         }else{
-            for(int i= points.size()-numOfPoints  ;i<points.size();i++){
+            for(int i = points.size() - numOfPoints; i < points.size(); i++){
                 int number = points.get(i);
-                dataset.addValue(number, series1, " "+i);
+                dataset.addValue(number, series1, " " + i);
             }
         } 
         

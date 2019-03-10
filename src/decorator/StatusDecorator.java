@@ -1,9 +1,5 @@
 package decorator;
 import subject.Subject;
-import subject.Stock;
-import java.awt.GridBagConstraints;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

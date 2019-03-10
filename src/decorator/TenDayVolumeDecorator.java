@@ -1,8 +1,6 @@
 package decorator;
 import subject.Subject;
 import subject.Stock;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
@@ -27,5 +25,4 @@ public class TenDayVolumeDecorator extends FrameDecorator{
         Stock stock = (Stock) subject;
         valueLabel.setText(Integer.toString(stock.getTenDayVolume()));
     }
-    
 }

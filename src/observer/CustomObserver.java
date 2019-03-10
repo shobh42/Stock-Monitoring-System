@@ -5,15 +5,7 @@ import chartcreator.LineChartFrame;
 import chartcreator.ChartFrame;
 import subject.Subject;
 import subject.Stock;
-import decorator.OpeningPriceDecorator;
-import decorator.StatusDecorator;
-import decorator.TenDayVolumeDecorator;
-import decorator.VolumePriceDecorator;
 import decorator.FrameDecorator;
-import decorator.BidPriceDecorator;
-import decorator.CurrentPriceDecorator;
-import decorator.AskPriceDecorator;
-import decorator.ClosingPriceDecorator;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -22,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
+import util.DecoratorFactory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -72,52 +64,13 @@ public class CustomObserver extends ObserverFrame{
         String selectedItem = availableStockComboBox.getSelectedItem().toString();
         String symbol = selectedItem.split(",")[0];
         
-        //Remove all the prevoius decorators so that the frame will show only current decorators
+        //Remove all the previous decorators so that the frame will show only current decorators
         removePreviousDecorator();
         decorators = new ArrayList<FrameDecorator>();
         Stock stock = portfolio.getStock(symbol);
         stock.addObserver(this);
         currentSubject = stock;
-        FrameDecorator decorator = null;
-        if(currentPriceCheckBox.isSelected()){
-            decorator = new CurrentPriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(openingPriceCheckBox.isSelected()){
-            decorator = new OpeningPriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(closingPriceCheckBox.isSelected()){
-            decorator = new ClosingPriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(askPriceCheckBox.isSelected()){
-            decorator = new AskPriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(statusCheckBox.isSelected()){
-            decorator = new StatusDecorator();
-            decorators.add(decorator);
-        }
-
-        if(bidPriceCheckBox.isSelected()){
-            decorator = new BidPriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(volumeCheckBox.isSelected()){
-            decorator = new VolumePriceDecorator();
-            decorators.add(decorator);
-        }
-        
-        if(tenDayVolumeCheckBox.isSelected()){
-            decorator = new TenDayVolumeDecorator();
-            decorators.add(decorator);
-        }
+        decorators = DecoratorFactory.createDecorator(checkBox);
         
         if(lineChartCheckBox.isSelected()){
             Stock currentStock = (Stock) currentSubject;

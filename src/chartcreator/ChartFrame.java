@@ -1,6 +1,5 @@
 package chartcreator;
 
-
 import DatasetValues.AskPriceDatasetValue;
 import DatasetValues.BidPriceDatasetValue;
 import DatasetValues.ClosingPriceDatasetValue;
@@ -13,7 +12,6 @@ import observer.Observer;
 import subject.Subject;
 import subject.Stock;
 import java.awt.BorderLayout;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -154,7 +152,6 @@ public class ChartFrame extends javax.swing.JFrame implements Runnable, Observer
         chartJPanel.updateUI();
         chartJPanel.add(BorderLayout.CENTER, chartPanel); 
         chartJPanel.repaint();
-        //PanelUpdater.repaintPanel(chartJPanel);
     }
 
     @Override

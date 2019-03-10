@@ -20,7 +20,6 @@ public abstract class FrameDecorator implements Observer{
     protected final JLabel nameLabel = new JLabel();
     protected final GridBagConstraints c = new GridBagConstraints();
     
-    
     public abstract void decorate(JPanel panel);
     
     protected void decorate(JPanel panel, int row, int col, int distanceY, String labelName){

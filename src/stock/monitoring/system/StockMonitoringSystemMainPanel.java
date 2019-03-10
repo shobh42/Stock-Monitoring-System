@@ -50,6 +50,7 @@ public class StockMonitoringSystemMainPanel extends javax.swing.JFrame{
         createCustomObserverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stock Monitoring System Panel");
 
         startButton.setText("Start ");
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -190,9 +191,11 @@ public class StockMonitoringSystemMainPanel extends javax.swing.JFrame{
 
     private void addRows() {
         Set<String> symbols = portfolio.getSymbols(); 
+        int rowIndex = 0;
         for(String s : symbols){
             String symbol = s.split(",")[0];
             stockMainTableModel.addRow(new Object[]{symbol, "", "", ""});
+            stockMainTableModel.addToMapping(s, rowIndex++);
             Stock stock = portfolio.getStock(symbol);
             stock.addObserver(stockMainTableModel);
         } 

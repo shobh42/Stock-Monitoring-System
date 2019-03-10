@@ -19,17 +19,7 @@ public class TenDayVolumeDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 11;
-        c.ipady = 2;
-        nameLabel.setText("Ten Day Volume");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 11;
-        c.ipady = 2;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 11, 0, 2, "Ten Day Volume");
     }
 
     @Override

@@ -20,16 +20,7 @@ public class CurrentPriceDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 4;
-        c.ipady = 2;
-        nameLabel.setText("Current Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 4;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 4, 0, 2, "Current Price");
     }
 
     @Override

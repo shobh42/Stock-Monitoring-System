@@ -52,6 +52,7 @@ public class AvailableStockList extends javax.swing.JFrame {
         createPortfolioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stock List");
 
         allStockJList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1" };

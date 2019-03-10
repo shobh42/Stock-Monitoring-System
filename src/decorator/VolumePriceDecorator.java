@@ -19,17 +19,7 @@ public class VolumePriceDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 10;
-        c.ipady = 2;
-        nameLabel.setText("Volume Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 10;
-        c.ipady = 2;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 10, 0, 2, "Volume Price");
     }
 
     @Override

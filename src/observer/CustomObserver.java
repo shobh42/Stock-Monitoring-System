@@ -3,7 +3,6 @@ import util.Portfolio;
 import chartcreator.BarChartFrame;
 import chartcreator.LineChartFrame;
 import chartcreator.ChartFrame;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import subject.Subject;
 import subject.Stock;
 import decorator.OpeningPriceDecorator;
@@ -60,6 +59,7 @@ public class CustomObserver extends ObserverFrame{
         checkBox = new ArrayList<JCheckBox>();
         updatePanel();
         AddCheckBoxToPanel();
+        setTitle("Custom Observer");
     }
     
     private void updatePanel() {
@@ -77,6 +77,7 @@ public class CustomObserver extends ObserverFrame{
         decorators = new ArrayList<FrameDecorator>();
         Stock stock = portfolio.getStock(symbol);
         stock.addObserver(this);
+        currentSubject = stock;
         FrameDecorator decorator = null;
         if(currentPriceCheckBox.isSelected()){
             decorator = new CurrentPriceDecorator();
@@ -119,21 +120,23 @@ public class CustomObserver extends ObserverFrame{
         }
         
         if(lineChartCheckBox.isSelected()){
-            ChartFrame chartFrame = new LineChartFrame();
+            Stock currentStock = (Stock) currentSubject;
+            ChartFrame chartFrame = new LineChartFrame(currentStock.getCompanyName());
             Thread thread = new Thread(chartFrame);
             thread.start();
             stock.addObserver(chartFrame);
         }
         
         if(barChartCheckBox.isSelected()){
-            ChartFrame chartFrame = new BarChartFrame();
+            Stock currentStock = (Stock) currentSubject;
+            ChartFrame chartFrame = new BarChartFrame(currentStock.getCompanyName());
             Thread thread = new Thread(chartFrame);
             thread.start();
             stock.addObserver(chartFrame);
         }
         
         decoratePanel();
-        repaintPanel();
+        stocksUpdatePanel.repaint();
     }                                          
     
     @Override
@@ -141,117 +144,63 @@ public class CustomObserver extends ObserverFrame{
         for(FrameDecorator decorator: decorators){
             decorator.update(stock);
         }
+        stocksUpdatePanel.repaint();
+        stocksUpdatePanel.revalidate();
+        
     }
 
     private void AddCheckBoxToPanel() {
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.ipadx = 30;
-        c.ipady = 2;
+
+        addCheckBoxToPanel(c, 0, 0, 30, 2);
         currentPriceCheckBox = new JCheckBox("Current Price");
         stocksUpdatePanel.add(currentPriceCheckBox, c);
         checkBox.add(currentPriceCheckBox);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.ipadx = 30;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 1, 0, 30, 2);
         openingPriceCheckBox = new JCheckBox("Opening Price");
         stocksUpdatePanel.add(openingPriceCheckBox, c);
         checkBox.add(openingPriceCheckBox);
                 
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 0;
-        c.ipadx = 20;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 2, 0, 20, 2);
         closingPriceCheckBox = new JCheckBox("Closing Price");
         stocksUpdatePanel.add(closingPriceCheckBox, c);
         checkBox.add(closingPriceCheckBox);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.ipadx = 30;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 0, 1, 30, 2);
         bidPriceCheckBox = new JCheckBox("Bid Price");
         stocksUpdatePanel.add(bidPriceCheckBox, c);
         checkBox.add(bidPriceCheckBox);
-        
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 1;
-        c.ipadx = 30;
-        c.ipady = 2;
+
+        addCheckBoxToPanel(c, 1, 1, 30, 2);
         statusCheckBox = new JCheckBox("Status");
         stocksUpdatePanel.add(statusCheckBox, c);
         checkBox.add(statusCheckBox);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 1;
-        c.ipadx = 20;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 2, 1, 20, 2);
         askPriceCheckBox = new JCheckBox("Ask Price");
         stocksUpdatePanel.add(askPriceCheckBox, c);
         checkBox.add(askPriceCheckBox);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.ipadx = 30;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 0, 2, 30, 2);
         volumeCheckBox = new JCheckBox("Current Volume");
         stocksUpdatePanel.add(volumeCheckBox, c);
         checkBox.add(volumeCheckBox);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 2;
-        c.ipadx = 30;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 1, 2, 30, 2);
         tenDayVolumeCheckBox = new JCheckBox("Ten Day Volume");
         stocksUpdatePanel.add(tenDayVolumeCheckBox, c);
         checkBox.add(tenDayVolumeCheckBox);
-        
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 2;
-        c.ipadx = 20;
-        c.ipady = 2;
+
+        addCheckBoxToPanel(c, 2, 2, 20, 2);
         lineChartCheckBox = new JCheckBox("Line Chart");
         stocksUpdatePanel.add(lineChartCheckBox, c);
-        
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 3;
-        c.ipadx = 30;
-        c.ipady = 2;
+
+        addCheckBoxToPanel(c, 0, 3, 30, 2);
         barChartCheckBox = new JCheckBox("Bar Chart");
         stocksUpdatePanel.add(barChartCheckBox, c);
         
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 5;
-        c.gridx = 1;
-        c.gridy = 3;
-        c.ipadx = 30;
-        c.ipady = 2;
+        addCheckBoxToPanel(c, 1, 3, 30, 2);
         doneButton = new JButton("Done");
         stocksUpdatePanel.add(doneButton, c);
         doneButton.addActionListener(new ActionListener() {
@@ -261,9 +210,17 @@ public class CustomObserver extends ObserverFrame{
         } );
 
         stocksUpdatePanel.repaint();
-        stocksUpdatePanel.revalidate();
     }
 
+    private void addCheckBoxToPanel(GridBagConstraints c, int row, int col, 
+            int distanceX, int distanceY){
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = row;
+        c.gridy = col;
+        c.ipadx = distanceX;
+        c.ipady = distanceY;
+    }
+    
     private void decoratePanel() {
         for(FrameDecorator decorator: decorators){
             decorator.decorate(stocksUpdatePanel);
@@ -273,12 +230,7 @@ public class CustomObserver extends ObserverFrame{
     private void removePreviousDecorator() {
         for(FrameDecorator decorator: decorators){
             decorator.removeLabel(stocksUpdatePanel);
-            repaintPanel();
+            stocksUpdatePanel.repaint();
         }    
-    }
-
-    private void repaintPanel() {
-        stocksUpdatePanel.repaint();
-        stocksUpdatePanel.revalidate();
     }
 }

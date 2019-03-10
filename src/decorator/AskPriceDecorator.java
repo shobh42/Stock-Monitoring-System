@@ -19,17 +19,7 @@ public class AskPriceDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 7;
-        c.ipady = 2;
-        nameLabel.setText("Ask Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 7;
-        c.ipady = 2;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 7, 0, 2, "Ask Price");
     }
 
     @Override

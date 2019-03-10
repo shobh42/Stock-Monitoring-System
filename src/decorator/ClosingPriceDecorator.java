@@ -1,8 +1,6 @@
 package decorator;
 import subject.Subject;
 import subject.Stock;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
@@ -16,20 +14,10 @@ import javax.swing.JPanel;
  * @author Shobhit
  */
 public class ClosingPriceDecorator extends FrameDecorator{
-
+    
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 6;
-        c.ipady = 2;
-        nameLabel.setText("Closing Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 6;
-        c.ipady = 2;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 6, 0, 2, "Closing Price");
     }
 
     @Override

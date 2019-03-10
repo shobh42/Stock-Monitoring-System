@@ -19,17 +19,7 @@ public class OpeningPriceDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 5;
-        c.ipady = 2;
-        nameLabel.setText("Opening Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 5;
-        c.ipady = 2;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 5, 0, 2, "Opening Price");
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.Set;
 public class ObserverFrame extends javax.swing.JFrame implements Observer{
 
     protected Portfolio portfolio;
-    protected Subject previousSubject;
+    protected Subject currentSubject;
     /**
      * Creates new form ObserverFrame
      */
@@ -55,7 +55,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
         volumePriceValueLabel = new javax.swing.JLabel();
         tenDayVolumeValueLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Observer");
 
         availableStockComboBox.addItemListener(new java.awt.event.ItemListener() {
@@ -190,14 +190,14 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
     private void availableStockComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_availableStockComboBoxItemStateChanged
         String selectedItem = availableStockComboBox.getSelectedItem().toString();
         // If the subject is changed, frame should be removed from the observer and frame should subscribe to new stock.
-        if(previousSubject != null){
-            previousSubject.removeObserver(this);
+        if(currentSubject != null){
+            currentSubject.removeObserver(this);
         }
         
         String symbol = selectedItem.split(",")[0];
         Stock stock = portfolio.getStock(symbol);
-        stock.addObserver(this);
-        previousSubject = stock;
+        currentSubject = stock;
+        currentSubject.addObserver(this);
     }//GEN-LAST:event_availableStockComboBoxItemStateChanged
 
     /**

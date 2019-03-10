@@ -19,16 +19,7 @@ public class BidPriceDecorator extends FrameDecorator{
 
     @Override
     public void decorate(JPanel panel) {
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 9;
-        c.ipady = 2;
-        nameLabel.setText("Bid Price");
-        panel.add(nameLabel, c);
-        
-        c.gridx = 1;
-        c.gridy = 9;
-        panel.add(valueLabel, c);
+        super.decorate(panel, 9, 0, 2, "Bid Price");
     }
     
     @Override

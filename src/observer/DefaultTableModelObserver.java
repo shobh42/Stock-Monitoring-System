@@ -1,6 +1,7 @@
 package observer;
 
-
+import java.util.HashMap;
+import java.util.Map;
 import observer.Observer;
 import subject.Subject;
 import subject.Stock;
@@ -13,54 +14,56 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Shobhit
  */
-public class DefaultTableModelObserver extends DefaultTableModel implements Observer{
+public class DefaultTableModelObserver extends DefaultTableModel implements Observer {
 
-    private Icon upIcon ;
+    private Icon upIcon;
     private Icon downIcon;
-    
-    public DefaultTableModelObserver(){
+    private Icon idleIcon;
+    private Map<String, Integer> stockRowMapping;
+
+    public DefaultTableModelObserver() {
         upIcon = new ImageIcon("upIcon.jpg");
         downIcon = new ImageIcon("downIcon.jpg");
+        idleIcon = new ImageIcon("idle.jpg");
+        stockRowMapping = new HashMap<>();
     }
-    
+
     @Override
     public void update(Subject stock) {
         Stock s = (Stock) stock;
-        for(int i = 0; i < getRowCount(); i++){
-            String currentRowSymbol = getValueAt(i, 0).toString();
-            if(s.getSymbol().equalsIgnoreCase(currentRowSymbol)){
-                String previousPrice = getValueAt(i, 1).toString();
-                Icon icon = upIcon;
-                if(previousPrice != ""){
-                    icon = Integer.parseInt(previousPrice) < s.getCurrentPrice() ?
-                        upIcon : downIcon;
-                }
-                
-                setValueAt(s.getCurrentPrice(), i, 1);
-                setValueAt(s.getOpeningPrice(), i, 2);
-                setValueAt(s.getClosingPrice(), i, 3);
-                setValueAt(s.getAskPrice(), i, 4);
-                setValueAt(icon, i, 5);
-                setValueAt(s.getBidPrice(), i, 6);
-                setValueAt(s.getCurrentVolume(), i, 7);
-                setValueAt(s.getTenDayVolume(), i, 8);
-                this.fireTableDataChanged();
-                break;
-            }
+        int rowNumber = stockRowMapping.get(s.getSymbol());
+        String previousPrice = getValueAt(rowNumber, 1).toString();
+        Icon icon = upIcon;
+        if (previousPrice != "") {
+            icon = Integer.parseInt(previousPrice) < s.getCurrentPrice()
+                    ? upIcon : downIcon;
         }
+        setValueAt(s.getCurrentPrice(), rowNumber, 1);
+        setValueAt(s.getOpeningPrice(), rowNumber, 2);
+        setValueAt(s.getClosingPrice(), rowNumber, 3);
+        setValueAt(s.getAskPrice(), rowNumber, 4);
+        setValueAt(icon, rowNumber, 5);
+        setValueAt(s.getBidPrice(), rowNumber, 6);
+        setValueAt(s.getCurrentVolume(), rowNumber, 7);
+        setValueAt(s.getTenDayVolume(), rowNumber, 8);
+        this.fireTableDataChanged();
     }
+
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return columnIndex == 5 ? ImageIcon.class : String.class;
     }
-    
+
     @Override
-    public boolean isCellEditable(int row, int column){
+    public boolean isCellEditable(int row, int column) {
         return false;//This causes all cells to be not editable
+    }
+
+    public void addToMapping(String stockName, int row) {
+        stockRowMapping.put(stockName, row);
     }
 }

@@ -22,11 +22,13 @@ public class DefaultTableModelObserver extends DefaultTableModel implements Obse
 
     private Icon upIcon;
     private Icon downIcon;
+    private Icon idleIcon;
     private Map<String, Integer> stockRowMapping;
 
     public DefaultTableModelObserver() {
         upIcon = new ImageIcon("upIcon.jpg");
         downIcon = new ImageIcon("downIcon.jpg");
+        idleIcon = new ImageIcon("idleIcon.jpg");
         stockRowMapping = new HashMap<>();
     }
 
@@ -35,11 +37,14 @@ public class DefaultTableModelObserver extends DefaultTableModel implements Obse
         Stock s = (Stock) stock;
         int rowNumber = stockRowMapping.get(s.getSymbol());
         String previousPrice = getValueAt(rowNumber, 1).toString();
-        Icon icon = upIcon;
+        Icon icon = idleIcon;
         if (previousPrice != "") {
-            icon = Integer.parseInt(previousPrice) < s.getCurrentPrice()
-                    ? upIcon : downIcon;
+            int previousPriceValue = Integer.parseInt(previousPrice);
+            int currentPrice = s.getCurrentPrice();
+            icon = previousPriceValue == currentPrice ? idleIcon : 
+                    currentPrice > previousPriceValue ? upIcon : downIcon;
         }
+        
         setValueAt(s.getCurrentPrice(), rowNumber, 1);
         setValueAt(s.getOpeningPrice(), rowNumber, 2);
         setValueAt(s.getClosingPrice(), rowNumber, 3);

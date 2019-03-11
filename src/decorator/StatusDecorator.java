@@ -19,11 +19,13 @@ public class StatusDecorator extends FrameDecorator {
     private int previousPrice;
     private Icon upIcon ;
     private Icon downIcon;
+    private Icon idleIcon;
             
     public StatusDecorator(){
         previousPrice = -1;
         upIcon = new ImageIcon("upIcon.jpg");
         downIcon = new ImageIcon("downIcon.jpg");
+        idleIcon = new ImageIcon("idleIcon.jpg");
     }
     
     @Override
@@ -35,8 +37,12 @@ public class StatusDecorator extends FrameDecorator {
     public void update(Subject subject) {
         Stock stock = (Stock) subject;
         int currentPrice = stock.getCurrentPrice();
-        Icon icon = upIcon;
-        icon = currentPrice > previousPrice ? upIcon : downIcon;
+        Icon icon = idleIcon;
+        if(previousPrice != -1){
+            icon = previousPrice == currentPrice ? idleIcon : 
+                    currentPrice > previousPrice ? upIcon : downIcon;
+        }
+        
         valueLabel.setIcon(icon);
         previousPrice = currentPrice;
     }

@@ -1,5 +1,6 @@
 package observer;
 
+import java.awt.event.ItemEvent;
 import util.Portfolio;
 import subject.Subject;
 import subject.Stock;
@@ -64,32 +65,46 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
             }
         });
 
-        currentPriceLabel.setText("Current Price :");
+        currentPriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        currentPriceLabel.setText("Current Price ");
 
+        currentPriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         currentPriceValueLabel.setText("Current Price Value");
 
-        openingPriceLabel.setText("Opening Price :");
+        openingPriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        openingPriceLabel.setText("Opening Price ");
 
-        closingPriceLabel.setText("Closing Price :");
+        closingPriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        closingPriceLabel.setText("Closing Price ");
 
-        askPriceLabel.setText("Ask Price :");
+        askPriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        askPriceLabel.setText("Ask Price ");
 
-        bidPriceLabel.setText("Bid Price :");
+        bidPriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        bidPriceLabel.setText("Bid Price ");
 
-        volumePriceLabel.setText("Volume :");
+        volumePriceLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        volumePriceLabel.setText("Volume Price");
 
-        tenDayVolumeLabel.setText("Ten Day Volume :");
+        tenDayVolumeLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        tenDayVolumeLabel.setText("Ten Day Volume ");
 
+        openingPriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         openingPriceValueLabel.setText("Opening Price Value");
 
+        closingPriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         closingPriceValueLabel.setText("Closing Price Value");
 
+        askPriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         askPriceValueLabel.setText("Ask Price");
 
+        bidPriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         bidPriceValueLabel.setText("Bid Price Value");
 
+        volumePriceValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         volumePriceValueLabel.setText("Volume Price Value");
 
+        tenDayVolumeValueLabel.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         tenDayVolumeValueLabel.setText("Ten Day Volume Value");
 
         javax.swing.GroupLayout stocksUpdatePanelLayout = new javax.swing.GroupLayout(stocksUpdatePanel);
@@ -99,35 +114,25 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
             .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
-                        .addComponent(closingPriceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(closingPriceValueLabel))
-                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
-                        .addComponent(askPriceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(askPriceValueLabel))
-                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
-                        .addComponent(bidPriceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bidPriceValueLabel))
-                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
-                        .addComponent(volumePriceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(volumePriceValueLabel))
-                    .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
-                        .addComponent(tenDayVolumeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tenDayVolumeValueLabel))
+                    .addComponent(openingPriceLabel)
                     .addGroup(stocksUpdatePanelLayout.createSequentialGroup()
                         .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(currentPriceLabel)
-                            .addComponent(openingPriceLabel))
+                            .addComponent(tenDayVolumeLabel)
+                            .addComponent(volumePriceLabel)
+                            .addComponent(bidPriceLabel)
+                            .addComponent(askPriceLabel)
+                            .addComponent(closingPriceLabel)
+                            .addComponent(currentPriceLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(openingPriceValueLabel)
-                            .addComponent(currentPriceValueLabel))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(currentPriceValueLabel)
+                            .addComponent(closingPriceValueLabel)
+                            .addComponent(askPriceValueLabel)
+                            .addComponent(bidPriceValueLabel)
+                            .addComponent(volumePriceValueLabel)
+                            .addComponent(tenDayVolumeValueLabel)
+                            .addComponent(openingPriceValueLabel))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         stocksUpdatePanelLayout.setVerticalGroup(
             stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +165,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
                 .addGroup(stocksUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tenDayVolumeLabel)
                     .addComponent(tenDayVolumeValueLabel))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +176,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(stocksUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(availableStockComboBox, 0, 388, Short.MAX_VALUE))
+                    .addComponent(availableStockComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -193,7 +198,7 @@ public class ObserverFrame extends javax.swing.JFrame implements Observer{
         if(currentSubject != null){
             currentSubject.removeObserver(this);
         }
-        
+       
         String symbol = selectedItem.split(",")[0];
         Stock stock = portfolio.getStock(symbol);
         currentSubject = stock;

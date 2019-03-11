@@ -52,7 +52,7 @@ public class DecoratorFactory {
                 decorator.add(new BidPriceDecorator());
             }
             
-            if(box.getText() == "Volume Price" && box.isSelected()){
+            if(box.getText() == "Current Volume" && box.isSelected()){
                 decorator.add(new VolumePriceDecorator());
             }
             

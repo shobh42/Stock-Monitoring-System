@@ -63,6 +63,9 @@ public class CustomObserver extends ObserverFrame{
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String selectedItem = availableStockComboBox.getSelectedItem().toString();
         String symbol = selectedItem.split(",")[0];
+        if(currentSubject != null){
+            currentSubject.removeObserver(this);
+        }
         
         //Remove all the previous decorators so that the frame will show only current decorators
         removePreviousDecorator();
@@ -96,9 +99,9 @@ public class CustomObserver extends ObserverFrame{
     public void update(Subject stock) {
         for(FrameDecorator decorator: decorators){
             decorator.update(stock);
+            stocksUpdatePanel.repaint();
         }
         
-        stocksUpdatePanel.repaint();
         stocksUpdatePanel.revalidate();
     }
 

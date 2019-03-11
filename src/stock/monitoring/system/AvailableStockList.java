@@ -5,7 +5,9 @@ import util.Portfolio;
 import stock.monitoring.system.StockMonitoringSystemMainPanel;
 import subject.Stock;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 
 /*
@@ -22,6 +24,7 @@ public class AvailableStockList extends javax.swing.JFrame {
 
     private DefaultListModel<String> userSelectedJlistModel = new DefaultListModel<String>();
     private AvailableStock avaiableStock = new AvailableStock();
+    private Set<String> currentUserSelectedList;
     
     /**
      * Creates new form Driver
@@ -29,6 +32,7 @@ public class AvailableStockList extends javax.swing.JFrame {
     public AvailableStockList() {
         initComponents();
         showStocks();
+        currentUserSelectedList = new HashSet<>();
     }
 
     /**
@@ -130,7 +134,12 @@ public class AvailableStockList extends javax.swing.JFrame {
         
         ArrayList<String> userSelectedStocks = (ArrayList <String>)allStockJList.getSelectedValuesList();
         for (String stock : userSelectedStocks) {
+            if(currentUserSelectedList.contains(stock)){
+                continue;
+            }
+            
             userSelectedJlistModel.addElement(stock);
+            currentUserSelectedList.add(stock);
         }
         
         userSelectedStockJList.setModel(userSelectedJlistModel);
@@ -144,6 +153,7 @@ public class AvailableStockList extends javax.swing.JFrame {
         ArrayList<String> userSelectedStocks = (ArrayList<String>) userSelectedStockJList.getSelectedValuesList();
         for (String stock : userSelectedStocks) {
             userSelectedJlistModel.removeElement(stock);
+            currentUserSelectedList.remove(stock);
         }
     }//GEN-LAST:event_removeButtonActionPerformed
 
